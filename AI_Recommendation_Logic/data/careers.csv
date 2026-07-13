@@ -1,0 +1,11 @@
+id,title,category,description,rating
+1,Software Engineer,Technology,Develop software applications,9.7
+2,Data Scientist,Artificial Intelligence,Analyze data and build predictive models,9.8
+3,Machine Learning Engineer,Artificial Intelligence,Develop AI systems and models,9.7
+4,Cyber Security Analyst,Security,Protect systems from cyber threats,9.5
+5,Cloud Engineer,Cloud,Manage cloud infrastructure,9.4
+6,UI UX Designer,Design,Design user-friendly interfaces,9.2
+7,DevOps Engineer,Technology,Automate software deployment,9.5
+8,Mobile App Developer,Technology,Develop Android and iOS applications,9.3
+9,Business Analyst,Business,Analyze business requirements,9.1
+10,Database Administrator,Database,Manage and optimize databases,9.2

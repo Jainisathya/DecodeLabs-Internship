@@ -1,0 +1,11 @@
+id,title,category,description,rating
+1,Python for Beginners,Programming,Learn Python from scratch,9.6
+2,Machine Learning A-Z,Artificial Intelligence,Master ML algorithms and projects,9.5
+3,Data Structures & Algorithms,Programming,Learn DSA for coding interviews,9.7
+4,Web Development Bootcamp,Web Development,HTML CSS JavaScript React Node.js,9.4
+5,Flutter Development,Mobile Development,Build Android and iOS apps using Flutter,9.5
+6,SQL Masterclass,Database,Learn SQL for database management,9.2
+7,Cloud Computing with AWS,Cloud,Deploy applications on AWS,9.3
+8,Cyber Security Essentials,Security,Introduction to cyber security concepts,9.1
+9,UI UX Design,Design,Design modern applications using Figma,9.0
+10,Deep Learning Specialization,Artificial Intelligence,Neural networks and deep learning,9.6
