@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -743,3 +744,6 @@ with st.expander("⚙ Debug Information"):
 # ------------------------------------------------
 # END OF APPLICATION
 # ------------------------------------------------
+=======
+
+>>>>>>> 0b900ebd19f3b23c1af6f8063cd9f7098feb507b
