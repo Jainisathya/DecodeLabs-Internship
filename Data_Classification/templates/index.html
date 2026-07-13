@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fas fa-heart-pulse"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">CardioPredict</span>
+                    <span class="brand-sub">Heart Disease Risk Assessment</span>
+                </div>
+            </div>
+            <div class="header-meta">
+                <span><i class="fas fa-database"></i> UCI Dataset</span>
+                <span><i class="fas fa-tree"></i> Random Forest</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-wrapper">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-top">
+                <h2>Patient Details</h2>
+                <p>Enter all clinical parameters to run the prediction.</p>
+            </div>
+
+            <form id="predictionForm" autocomplete="off" novalidate>
+
+                <div class="field-section">
+                    <div class="section-label">Personal</div>
+
+                    <div class="field">
+                        <label for="patient_name">Patient Name</label>
+                        <input type="text" id="patient_name" placeholder="Full name">
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" placeholder="e.g. 54" min="1" max="120">
+                        </div>
+                        <div class="field">
+                            <label for="sex">Gender</label>
+                            <select id="sex">
+                                <option value="">Select</option>
+                                <option value="1">Male</option>
+                                <option value="0">Female</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field-section">
+                    <div class="section-label">Cardiac</div>
+
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="cp">Chest Pain Type</label>
+                            <select id="cp">
+                                <option value="">Select</option>
+                                <option value="0">Typical Angina</option>
+                                <option value="1">Atypical Angina</option>
+                                <option value="2">Non-Anginal Pain</option>
+                                <option value="3">Asymptomatic</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="trestbps">Resting BP <span class="unit">mm Hg</span></label>
+                            <input type="number" id="trestbps" placeholder="e.g. 120">
+                        </div>
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="chol">Cholesterol <span class="unit">mg/dl</span></label>
+                            <input type="number" id="chol" placeholder="e.g. 200">
+                        </div>
+                        <div class="field">
+                            <label for="fbs">Fasting Blood Sugar</label>
+                            <select id="fbs">
+                                <option value="">Select</option>
+                                <option value="1">Above 120 mg/dl</option>
+                                <option value="0">Normal</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="restecg">Resting ECG</label>
+                            <select id="restecg">
+                                <option value="">Select</option>
+                                <option value="0">Normal</option>
+                                <option value="1">ST-T Abnormality</option>
+                                <option value="2">LV Hypertrophy</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="thalach">Max Heart Rate</label>
+                            <input type="number" id="thalach" placeholder="e.g. 150">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field-section">
+                    <div class="section-label">Exercise &amp; ST</div>
+
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="exang">Exercise Angina</label>
+                            <select id="exang">
+                                <option value="">Select</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="oldpeak">ST Depression</label>
+                            <input type="number" step="0.1" id="oldpeak" placeholder="e.g. 1.0">
+                        </div>
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="slope">ST Slope</label>
+                            <select id="slope">
+                                <option value="">Select</option>
+                                <option value="0">Upsloping</option>
+                                <option value="1">Flat</option>
+                                <option value="2">Downsloping</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="ca">Major Vessels</label>
+                            <select id="ca">
+                                <option value="">Select</option>
+                                <option>0</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="thal">Thalassemia</label>
+                        <select id="thal">
+                            <option value="">Select type</option>
+                            <option value="1">Normal</option>
+                            <option value="2">Fixed Defect</option>
+                            <option value="3">Reversible Defect</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="button" class="run-btn" onclick="predictHeartDisease()">
+                    <i class="fas fa-stethoscope"></i> Run Prediction
+                </button>
+
+            </form>
+        </aside>
+
+        <main class="content">
+
+            <!-- Result panel -->
+            <section class="panel result-panel" id="resultCard">
+                <div class="panel-header">
+                    <h3><i class="fas fa-chart-bar"></i> Prediction Result</h3>
+                </div>
+                <div id="result" class="panel-body">
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <p class="empty-title">No prediction yet</p>
+                        <p class="empty-hint">Fill in the patient form and click <strong>Run Prediction</strong>.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About panel -->
+            <section class="panel about-panel">
+                <div class="panel-header">
+                    <h3><i class="fas fa-notes-medical"></i> About This Tool</h3>
+                </div>
+                <div class="panel-body">
+                    <p class="about-desc">
+                        This tool predicts heart disease risk from 13 clinical parameters using a
+                        <strong>Random Forest</strong> classifier trained on the
+                        <strong>UCI Heart Disease Dataset</strong>.
+                    </p>
+                    <ul class="about-list">
+                        <li><i class="fas fa-check"></i> Machine learning classification</li>
+                        <li><i class="fas fa-check"></i> Flask-powered backend</li>
+                        <li><i class="fas fa-check"></i> Confidence score output</li>
+                        <li><i class="fas fa-check"></i> Personalised health recommendations</li>
+                        <li><i class="fas fa-check"></i> Downloadable PDF report</li>
+                    </ul>
+                    <div class="disclaimer">
+                        <i class="fas fa-triangle-exclamation"></i>
+                        For clinical support only. Not a substitute for professional medical advice.
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer class="site-footer">
+        <span>Heart Disease Prediction System</span>
+        <span class="sep">·</span>
+        <span>Built with Flask &amp; scikit-learn</span>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
